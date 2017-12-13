@@ -1,0 +1,32 @@
+<div class="panel panel-default rf-space-form">
+
+  <div class="panel-heading">
+    <h4>Particulars</h4>
+  </div>
+  <div class="panel-body">
+    <form class="form-vertical">
+      <label for="one">Particular: </label>
+      <input type="text" id="one" class="form-control" [(ngModel)]="particular.name" name="one" placeholder="One" style="border: none;"/>
+      <label for="two">Particular: </label>
+      <input type="text" id="two" class="form-control" [(ngModel)]="particular.age" name="two" placeholder="Two" style="border: none;"/>
+      <div class="rf-spacer-top">
+        <button type="button" class="btn btn-info btn-sm" title="Add" (click)="addParticular(particular)">
+          <span style="float:left;" class="glyphicon glyphicon-plus-sign"></span>
+        </button>
+        <button type="button" class="btn btn-danger btn-sm" title="Clear">
+          <span style="float:left;" class="glyphicon glyphicon-remove-sign"></span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="particularsGrid">
+      <ag-grid-angular style="height: 525px; width: 900px;" class="ag-theme-fresh"
+      
+        [gridOptions]="gridOptions"
+        [columnDefs]="columnDefs"
+        [rowData]="rowData">
+      </ag-grid-angular>
+  </div>
+
+</div>
