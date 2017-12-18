@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Particular } from './Particular';
 import { GridOptions, GridApi, ColumnApi } from 'ag-grid';
+import { RformService } from '../common/rform.service';
 
 @Component({
   selector: 'app-r-particulars-form',
@@ -19,41 +20,74 @@ export class RParticularsFormComponent implements OnInit {
   private columnApi: ColumnApi;
   particular: any = {};
   particulars: Array<Particular> = [];
+  private projects: any[];
+  private rTypes: any[];
+  particularsGridToggler: boolean = true;
+  particularsFormToggler: boolean = false;
+  particularsActionBarToggler: boolean = false;
 
-  constructor() {
-    this.gridOptions = <GridOptions>{};
-    this.rowData = this.createRowData();
+  constructor(private rformService: RformService) {
     this.columnDefs = this.createColumnDefs();
-  }
-
-  private onReady(params) {
-    console.log(params);
-    //this.api = params.api;
-    //this.columnApi = params.columnApi;
+    this.gridOptions = <GridOptions>{
+      enableSorting: true,
+    };
   }
 
   ngOnInit() {
+    this.particularsFormToggler = true;
+    //make two service calls to fetch R.Type and Project drop-down data.
+    this.rformService.getRTypes().subscribe(data => {
+      this.rTypes = data;
+      return data;
+    });
+    this.rformService.getProjects().subscribe(data => {
+      this.projects = data;
+      return data;
+    });
   }
 
   addParticular(particular: Particular) {
-    console.log("RParticularsFormComponent.addParticular()" + particular);
+    this.particularsFormToggler = false;
+    this.particularsActionBarToggler = true;
     this.createParticulars(particular);
   }
 
   createParticulars(particular: Particular) {
+    this.particularsGridToggler = false;
     this.particulars.push(particular);
-    console.log(this.particulars);
+    this.rowData = this.createRowData(this.particulars);
+    this.gridOptions.api.setRowData(this.rowData);
   }
 
   createColumnDefs() {
     const columnDefinitions = [
-      { field: 'firstName', width: 100 },
-      { field: 'lastName', width: 100 },
-      { field: 'phoneNumber', width: 200 }
+      { field: 'date', width: 100 },
+      { field: 'billId', width: 100 },
+      { field: 'rType', width: 100 },
+      { field: 'project', width: 150 },
+      { field: 'noOfPersons', width: 130 },
+      { field: 'amount', width: 100 }
     ];
     return columnDefinitions;
   };
 
-  createRowData() { return null }
+  createRowData(particulars: Particular[]) {
+    return particulars;
+  }
 
+  clearParticularsFormData() {
+    this.particular = {};
+  }
+
+  addMoreParticular() {
+    this.clearParticularsFormData();
+    this.particularsFormToggler = true;
+    this.particularsActionBarToggler = false;
+    this.particularsGridToggler = false;
+  }
+
+  finalizeOnParticulars() {
+    //take all the row data and make a service call.
+    console.log("final rows= "+this.rowData);
+  }
 }

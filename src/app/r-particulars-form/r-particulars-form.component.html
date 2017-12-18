@@ -4,29 +4,55 @@
     <h4>Particulars</h4>
   </div>
   <div class="panel-body">
-    <form class="form-vertical">
-      <label for="one">Particular: </label>
-      <input type="text" id="one" class="form-control" [(ngModel)]="particular.name" name="one" placeholder="One" style="border: none;"/>
-      <label for="two">Particular: </label>
-      <input type="text" id="two" class="form-control" [(ngModel)]="particular.age" name="two" placeholder="Two" style="border: none;"/>
+    <form class="form-vertical" *ngIf="particularsFormToggler">
+      <label for="billDate">Date </label>
+      <input type="date" id="billDate" class="form-control no-border" [(ngModel)]="particular.date" name="billDate" placeholder="Bill Date"/>
+      <label for="billId">Bill number </label>
+      <input type="text" id="billId" class="form-control no-border" [(ngModel)]="particular.billId" name="billId" placeholder="Bill Number"/>
+      <label for="rtypes">R Type</label>
+      <select name="rtypes" class="form-control no-border" [(ngModel)]="particular.rType">
+          <option value="" disabled selected>Please select</option>
+          <option *ngFor="let rtype of rTypes">
+              {{rtype.typeName}}
+          </option>
+      </select>
+      <label for="project">Project</label>
+      <select name="project" class="form-control no-border" placeholder="Project" [(ngModel)]="particular.project">
+          <option value="" disabled selected>Please select</option>
+          <option *ngFor="let project of projects">
+              {{project.projectName}}&nbsp;-&nbsp;{{project.projectType}}
+          </option>
+      </select>
+      <label for="noOfPerson">Persons: </label>
+      <input type="number" id="noOfPerson" class="form-control no-border" [(ngModel)]="particular.noOfPersons" name="billId" placeholder="No of Persons" style="border: none;"/>
+      <label for="amount">Amount: </label>
+      <input type="number" id="amount" class="form-control no-border" [(ngModel)]="particular.amount" name="amount" placeholder="Bill Amount" style="border: none;"/>
+
       <div class="rf-spacer-top">
-        <button type="button" class="btn btn-info btn-sm" title="Add" (click)="addParticular(particular)">
+        <button type="button" class="btn btn-info btn" title="Add" (click)="addParticular(particular)">
           <span style="float:left;" class="glyphicon glyphicon-plus-sign"></span>
         </button>
-        <button type="button" class="btn btn-danger btn-sm" title="Clear">
+        <button type="button" class="btn btn-danger btn-sm" title="Clear" (click)="clearParticularsFormData()">
           <span style="float:left;" class="glyphicon glyphicon-remove-sign"></span>
         </button>
       </div>
     </form>
   </div>
 
-  <div class="particularsGrid">
-      <ag-grid-angular style="height: 525px; width: 900px;" class="ag-theme-fresh"
-      
-        [gridOptions]="gridOptions"
-        [columnDefs]="columnDefs"
-        [rowData]="rowData">
-      </ag-grid-angular>
+  <div *ngIf="particularsActionBarToggler" class="rf-spacer-bottom rf-spacer-left">
+    <!-- A button to add more particulars btn btn-default.-->
+    <button type="button" class="btn btn-default" title="Add More" (click)="addMoreParticular()">Add more</button>
+    <!-- A button to finalize the particulars and list all them in rform component and submit. -->
+    <button type="button" class="btn btn-default" title="Finalize your particulars" (click)="finalizeOnParticulars()">Finalize</button>
   </div>
 
+</div>
+
+<div [ngClass]="{hide: particularsGridToggler}">
+    <ag-grid-angular style="height: 400px; width: 682px;" class="ag-theme-fresh particularsGrid"
+      [gridOptions]="gridOptions"
+      [columnDefs]="columnDefs"
+      [rowData]="rowData">
+
+    </ag-grid-angular>
 </div>

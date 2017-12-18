@@ -6,6 +6,22 @@
     margin-top: 10px;
 }
 
+.rf-spacer-bottom {
+    margin-bottom: 10px;
+}
+
+.rf-spacer-left {
+    margin-left: 10px;
+}
+
 .particularsGrid {
-    width: 52%;
+    width: 50%;
+}
+
+.no-border {
+    border: none;
+}
+
+.hide {
+    display: none;
 }

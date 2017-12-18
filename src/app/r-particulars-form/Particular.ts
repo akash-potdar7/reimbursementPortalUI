@@ -1,6 +1,12 @@
 // Bean class.
 export class Particular {
-    
-        constructor (private name: any, private age: any) {}
-       
-}    
+
+        constructor(
+                private date: Date,
+                private rType: string,
+                private project: string,
+                private noOfPersons: number,
+                private amount: number
+        ) { }
+
+}

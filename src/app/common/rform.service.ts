@@ -9,8 +9,19 @@ export class RformService {
 
   getEmployeeDataByEmpId(id: number): Observable<any> {
     return this.http.get('/api/test?id=' + id).map(response => {
-      console.log('response= ' + response);
       return response.json();
+    });
+  }
+
+  getRTypes(): Observable<any> {
+    return this.http.get('/api/getRTypes').map(response=>{
+      return response.json()
+    });
+  }
+
+  getProjects(): Observable<any> {
+    return this.http.get('/api/getProjects').map(response=>{
+      return response.json()
     });
   }
 
