@@ -14,13 +14,13 @@ export class RformService {
   }
 
   getRTypes(): Observable<any> {
-    return this.http.get('/api/getRTypes').map(response=>{
+    return this.http.get('/api/getRTypes').map(response => {
       return response.json()
     });
   }
 
   getProjects(): Observable<any> {
-    return this.http.get('/api/getProjects').map(response=>{
+    return this.http.get('/api/getProjects').map(response => {
       return response.json()
     });
   }

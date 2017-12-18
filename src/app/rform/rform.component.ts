@@ -21,10 +21,8 @@ export class RformComponent implements OnInit {
   }
 
   loadOnEmpIdChange(id: any) {
-    console.log('RformComponent.doSomething() id= ' + id);
     if (id && id > 10000) {
       this.rformService.getEmployeeDataByEmpId(id).subscribe(data => {
-        console.log('data from service= ' + data);
         this.isValidEmp = true;
         return this.emp = data;
       });
