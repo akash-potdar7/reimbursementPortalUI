@@ -8,7 +8,7 @@ export class RformService {
   constructor(private http: Http) { }
 
   getEmployeeDataByEmpId(id: number): Observable<any> {
-    return this.http.get('/api/test?id=' + id).map(response => {
+    return this.http.get('/api/getEmployeeById?id=' + id).map(response => {
       return response.json();
     });
   }
