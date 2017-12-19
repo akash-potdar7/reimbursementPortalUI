@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Particular } from './Particular';
 import { GridOptions, GridApi, ColumnApi } from 'ag-grid';
 import { RformService } from '../common/rform.service';
+import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-r-particulars-form',
   templateUrl: './r-particulars-form.component.html',
   styleUrls: ['./r-particulars-form.component.css']
 })
-export class RParticularsFormComponent implements OnInit {
+export class RParticularsFormComponent implements OnInit, OnChanges {
+ 
+  @Input() empId: number; 
 
   private gridOptions: GridOptions;
   private icons: any;
@@ -31,6 +34,16 @@ export class RParticularsFormComponent implements OnInit {
     this.gridOptions = <GridOptions>{
       enableSorting: true,
     };
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("in ngOnChanges= "+this.empId);
+    for (let propName in changes) {
+      let chng = changes[propName];
+      let cur  = JSON.stringify(chng.currentValue);
+      let prev = JSON.stringify(chng.previousValue);
+      console.log(chng+" : "+prev+" - "+cur)
+    }
   }
 
   ngOnInit() {
@@ -88,6 +101,6 @@ export class RParticularsFormComponent implements OnInit {
 
   finalizeOnParticulars() {
     //take all the row data and make a service call.
-    console.log("final rows= "+this.rowData);
+    console.log("final rows= " + this.rowData);
   }
 }

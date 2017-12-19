@@ -1,14 +1,16 @@
 <div class="panel panel-default rf-space-form">
-
   <div class="panel-heading">
-    <h4>Particulars</h4>
+    <h4>Particulars for {{empId}}</h4>
   </div>
   <div class="panel-body">
     <form class="form-vertical" *ngIf="particularsFormToggler">
-      <label for="billDate">Date </label>
+
+      <label for="billDate">Date</label>
       <input type="date" id="billDate" class="form-control no-border" [(ngModel)]="particular.date" name="billDate" placeholder="Bill Date"/>
-      <label for="billId">Bill number </label>
+      
+      <label for="billId">Bill number</label>
       <input type="text" id="billId" class="form-control no-border" [(ngModel)]="particular.billId" name="billId" placeholder="Bill Number"/>
+      
       <label for="rtypes">R Type</label>
       <select name="rtypes" class="form-control no-border" [(ngModel)]="particular.rType">
           <option value="" disabled selected>Please select</option>
@@ -16,6 +18,7 @@
               {{rtype.typeName}}
           </option>
       </select>
+      
       <label for="project">Project</label>
       <select name="project" class="form-control no-border" placeholder="Project" [(ngModel)]="particular.project">
           <option value="" disabled selected>Please select</option>
@@ -23,16 +26,18 @@
               {{project.projectName}}&nbsp;-&nbsp;{{project.projectType}}
           </option>
       </select>
-      <label for="noOfPerson">Persons: </label>
+      
+      <label for="noOfPerson">Persons</label>
       <input type="number" id="noOfPerson" class="form-control no-border" [(ngModel)]="particular.noOfPersons" name="billId" placeholder="No of Persons" style="border: none;"/>
-      <label for="amount">Amount: </label>
+      
+      <label for="amount">Amount</label>
       <input type="number" id="amount" class="form-control no-border" [(ngModel)]="particular.amount" name="amount" placeholder="Bill Amount" style="border: none;"/>
 
       <div class="rf-spacer-top">
         <button type="button" class="btn btn-info btn" title="Add" (click)="addParticular(particular)">
           <span style="float:left;" class="glyphicon glyphicon-plus-sign"></span>
         </button>
-        <button type="button" class="btn btn-danger btn-sm" title="Clear" (click)="clearParticularsFormData()">
+        <button type="button" class="btn btn-danger btn" title="Clear" (click)="clearParticularsFormData()">
           <span style="float:left;" class="glyphicon glyphicon-remove-sign"></span>
         </button>
       </div>
@@ -43,7 +48,7 @@
     <!-- A button to add more particulars btn btn-default.-->
     <button type="button" class="btn btn-default" title="Add More" (click)="addMoreParticular()">Add more</button>
     <!-- A button to finalize the particulars and list all them in rform component and submit. -->
-    <button type="button" class="btn btn-default" title="Finalize your particulars" (click)="finalizeOnParticulars()">Finalize</button>
+    <button type="button" class="btn btn-default" title="Finalize your particulars" (click)="finalizeOnParticulars()">Submit for approval</button>
   </div>
 
 </div>

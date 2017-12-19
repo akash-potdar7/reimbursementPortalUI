@@ -13,6 +13,7 @@ export class RformComponent implements OnInit {
   emp: any = {};
   isValidEmp: boolean = false;
   enableParticularsComponent: boolean = false;
+  employeeId: number;
 
   ngOnInit() {
   }
@@ -24,16 +25,14 @@ export class RformComponent implements OnInit {
     if (id && id > 10000) {
       this.rformService.getEmployeeDataByEmpId(id).subscribe(data => {
         this.isValidEmp = true;
+        this.enableParticularsComponent = true;
         return this.emp = data;
       });
     } else {
       this.emp = {};
       this.isValidEmp = false;
+      this.enableParticularsComponent = false;
     }
-  }
-
-  goToForms() {
-    this.enableParticularsComponent = true;
   }
 
 }
