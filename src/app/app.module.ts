@@ -10,13 +10,16 @@ import { RformService } from './common/rform.service';
 import { RParticularsFormComponent } from './r-particulars-form/r-particulars-form.component';
 
 import { AgGridModule } from "ag-grid-angular";
+import { RformRecordsComponent } from './rform-records/rform-records.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     RformComponent,
-    RParticularsFormComponent
+    RParticularsFormComponent,
+    RformRecordsComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,8 @@ import { AgGridModule } from "ag-grid-angular";
     HttpModule,
     AgGridModule.withComponents([
       RParticularsFormComponent
-    ])
+    ]),
+    AppRoutingModule
   ],
   providers: [RformService],
   bootstrap: [AppComponent]
