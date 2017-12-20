@@ -2,11 +2,12 @@
 export class Particular {
 
         constructor(
-                private date: Date,
-                private rType: string,
-                private project: string,
-                private noOfPersons: number,
-                private amount: number
+                public id: number,
+                public billDate: Date,
+                public billNumber: string,
+                public typeName: any,
+                public projectName: any,
+                public noOfPersons: number,
+                public amount: number
         ) { }
-
 }

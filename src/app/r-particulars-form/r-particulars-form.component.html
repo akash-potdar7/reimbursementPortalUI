@@ -6,13 +6,13 @@
     <form class="form-vertical" *ngIf="particularsFormToggler">
 
       <label for="billDate">Date</label>
-      <input type="date" id="billDate" class="form-control no-border" [(ngModel)]="particular.date" name="billDate" placeholder="Bill Date"/>
+      <input type="date" id="billDate" class="form-control no-border" [(ngModel)]="particular.billDate" name="billDate" placeholder="Bill Date"/>
       
-      <label for="billId">Bill number</label>
-      <input type="text" id="billId" class="form-control no-border" [(ngModel)]="particular.billId" name="billId" placeholder="Bill Number"/>
+      <label for="billNumber">Bill number</label>
+      <input type="text" id="billNumber" class="form-control no-border" [(ngModel)]="particular.billNumber" name="billNumber" placeholder="Bill Number"/>
       
       <label for="rtypes">R Type</label>
-      <select name="rtypes" class="form-control no-border" [(ngModel)]="particular.rType">
+      <select name="rtypes" class="form-control no-border" [(ngModel)]="particular.typeName">
           <option value="" disabled selected>Please select</option>
           <option *ngFor="let rtype of rTypes">
               {{rtype.typeName}}
@@ -20,7 +20,7 @@
       </select>
       
       <label for="project">Project</label>
-      <select name="project" class="form-control no-border" placeholder="Project" [(ngModel)]="particular.project">
+      <select name="project" class="form-control no-border" placeholder="Project" [(ngModel)]="particular.projectName">
           <option value="" disabled selected>Please select</option>
           <option *ngFor="let project of projects">
               {{project.projectName}}&nbsp;-&nbsp;{{project.projectType}}

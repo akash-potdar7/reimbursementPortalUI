@@ -5,8 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { RformComponent } from '../rform/rform.component';
 
 const routes: Routes = [
-  {path: 'rform', component: RformComponent},
-  {path: 'viewSubmitted', component: RformRecordsComponent}
+  { path: 'rform', component: RformComponent },
+  { path: 'viewSubmitted', component: RformRecordsComponent }
 ];
 
 @NgModule({
@@ -20,7 +20,5 @@ const routes: Routes = [
   declarations: []
 })
 export class AppRoutingModule {
-  constructor() {
-    console.log("AppRoutingModule")
-  }
+  constructor() {}
 }
