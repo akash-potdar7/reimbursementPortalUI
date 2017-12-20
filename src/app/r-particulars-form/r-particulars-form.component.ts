@@ -11,7 +11,7 @@ import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 })
 export class RParticularsFormComponent implements OnInit, OnChanges {
  
-  @Input() empId: number; 
+  @Input() employeeObj: any; 
 
   private gridOptions: GridOptions;
   private icons: any;
@@ -33,17 +33,11 @@ export class RParticularsFormComponent implements OnInit, OnChanges {
     this.columnDefs = this.createColumnDefs();
     this.gridOptions = <GridOptions>{
       enableSorting: true,
+      rowSelection: 'multiple'
     };
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("in ngOnChanges= "+this.empId);
-    for (let propName in changes) {
-      let chng = changes[propName];
-      let cur  = JSON.stringify(chng.currentValue);
-      let prev = JSON.stringify(chng.previousValue);
-      console.log(chng+" : "+prev+" - "+cur)
-    }
   }
 
   ngOnInit() {

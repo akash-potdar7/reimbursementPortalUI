@@ -24,7 +24,7 @@ import { AgGridModule } from "ag-grid-angular";
     HttpModule,
     AgGridModule.withComponents([
       RParticularsFormComponent
-  ])
+    ])
   ],
   providers: [RformService],
   bootstrap: [AppComponent]

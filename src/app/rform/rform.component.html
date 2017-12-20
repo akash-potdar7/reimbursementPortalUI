@@ -25,21 +25,11 @@
                             </ul>
                         </div>
                     </div>
-                    <div *ngIf="isValidEmp" class="row">
-                        <div class="col-sm-10">
-                            <button type="button" class="btn btn-default" title="View">
-                                View submitted
-                                <span class="badge">
-                                    <i class="fa fa-id-card" aria-hidden="true"></i>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-sm-7">
                     <div class="row">
                         <div class="container" *ngIf="enableParticularsComponent">
-                            <app-r-particulars-form [empId]="emp.empNo"></app-r-particulars-form>
+                            <app-r-particulars-form [employeeObj]="emp"></app-r-particulars-form>
                         </div>
                     </div>
                 </div>
