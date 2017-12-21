@@ -5,8 +5,8 @@ export class Particular {
                 public id: number,
                 public billDate: Date,
                 public billNumber: string,
-                public typeName: any,
-                public projectName: any,
+                public rType: any,
+                public projectDetail: any,
                 public noOfPersons: number,
                 public amount: number
         ) { }

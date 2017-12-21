@@ -19,6 +19,8 @@ export class RParticularsFormComponent implements OnInit, OnChanges {
   private columnDefs: any[];
   private rowCount: string;
 
+  private partuculars: Particular[];
+
   private api: GridApi;
   private columnApi: ColumnApi;
   particular: any = {};
@@ -58,12 +60,24 @@ export class RParticularsFormComponent implements OnInit, OnChanges {
     });
   }
 
+  createColumnDefs() {
+    const columnDefinitions = [
+      { field: 'billDate', width: 100 },
+      { field: 'billNumber', width: 100 },
+      { field: 'rType', width: 100 },
+      { field: 'projectDetail', width: 150 },
+      { field: 'noOfPersons', width: 130 },
+      { field: 'amount', width: 100 }
+    ];
+    return columnDefinitions;
+  }
+
   initGridRowData() {
     let reimbursements = this.employeeObj.reimbursements;
     let particular: Particular;
     if (reimbursements && reimbursements.length > 0) {
-      this.particularsGridToggler = false; //ngIf ... ngIf ~ ngClass: hide
-      this.particularsFormToggler = false; //ngClass: hide
+      this.particularsGridToggler = false; // ngClass ... ngIf ~ ngClass: hide
+      this.particularsFormToggler = false; // ngIf: hide
       this.particularsActionBarToggler = true; // ngIf
 
       reimbursements.forEach(element => {
@@ -71,8 +85,8 @@ export class RParticularsFormComponent implements OnInit, OnChanges {
           id: element.id,
           billDate: element.billDate,
           billNumber: element.billNumber,
-          typeName: element.rType.typeName,
-          projectName: element.projectDetail.projectName,
+          rType: element.rType.typeName,
+          projectDetail: element.projectDetail.projectName,
           noOfPersons: element.noOfPersons,
           amount: element.amount
         }
@@ -85,29 +99,21 @@ export class RParticularsFormComponent implements OnInit, OnChanges {
   addParticular(particular: Particular) {
     this.particularsActionBarToggler = true;
     this.particularsFormToggler = false;
-    console.log(particular);
+    this.particularsGridToggler = false;
+
+    particular.projectDetail = particular.projectDetail.split("-")[0].trim();
+
     let currentRowData = this.rowData;
-    console.log("current= "+currentRowData);
     currentRowData.push(particular);
-    console.log("plus " +currentRowData);
     this.rowData = currentRowData;
     this.api.setRowData(this.rowData);
   }
 
-  createColumnDefs() {
-    const columnDefinitions = [
-      { field: 'billDate', width: 100 },
-      { field: 'billNumber', width: 100 },
-      { field: 'typeName', width: 100 },
-      { field: 'projectName', width: 150 },
-      { field: 'noOfPersons', width: 130 },
-      { field: 'amount', width: 100 }
-    ];
-    return columnDefinitions;
-  }
-
   clearParticularsFormData() {
     this.particular = {};
+    this.particularsActionBarToggler = true;
+    this.particularsFormToggler = false;
+    this.particularsGridToggler = this.rowData.length > 0 ? false : true;
   }
 
   addMoreParticular() {
@@ -118,9 +124,29 @@ export class RParticularsFormComponent implements OnInit, OnChanges {
   }
 
   finalizeOnParticulars() {
-    // take all the row data and make a service call.
-    console.log('final rows for employee ' + this.employeeObj.empNo + ' is= ' + this.rowData);
+    this.employeeObj.reimbursements = this.rowData;
+    let reimbursements = this.employeeObj.reimbursements;
+    this.employeeObj.reimbursements = []; // emptying because, overriding would be tidious.
+    let rTypes = this.rTypes;
+    let projects = this.projects
+    // loop over reimbursements, on each element set full reimbursement data in which drop-down values are objects.
+    reimbursements.forEach(reimbursement => {
+      let fullRTypeObj = rTypes.filter(rType => rType.typeName === reimbursement.rType);
+      let fullProjectObj = projects.filter(project => {
+        console.log(reimbursement.projectDetail)
+        return project.projectName === reimbursement.projectDetail
+      });
+
+      delete reimbursement["projectName"];
+      delete reimbursement["typeName"];
+
+      reimbursement.rType = fullRTypeObj[0];
+      reimbursement.projectDetail = fullProjectObj[0];
+
+      this.employeeObj.reimbursements.push(reimbursement);
+    });
     const empObj = this.employeeObj;
     this.rformService.storeReimbursements(empObj);
   }
+
 }

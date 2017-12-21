@@ -12,24 +12,24 @@
       <input type="text" id="billNumber" class="form-control no-border" [(ngModel)]="particular.billNumber" name="billNumber" placeholder="Bill Number"/>
       
       <label for="rtypes">R Type</label>
-      <select name="rtypes" class="form-control no-border" [(ngModel)]="particular.typeName">
+      <select name="rtypes" class="form-control no-border" [(ngModel)]="particular.rType">
           <option value="" disabled selected>Please select</option>
           <option *ngFor="let rtype of rTypes">
               {{rtype.typeName}}
           </option>
       </select>
-      
+
       <label for="project">Project</label>
-      <select name="project" class="form-control no-border" placeholder="Project" [(ngModel)]="particular.projectName">
+      <select name="project" class="form-control no-border" placeholder="Project" [(ngModel)]="particular.projectDetail">
           <option value="" disabled selected>Please select</option>
           <option *ngFor="let project of projects">
               {{project.projectName}}&nbsp;-&nbsp;{{project.projectType}}
           </option>
       </select>
-      
+
       <label for="noOfPerson">Persons</label>
       <input type="number" id="noOfPerson" class="form-control no-border" [(ngModel)]="particular.noOfPersons" name="billId" placeholder="No of Persons" style="border: none;"/>
-      
+
       <label for="amount">Amount</label>
       <input type="number" id="amount" class="form-control no-border" [(ngModel)]="particular.amount" name="amount" placeholder="Bill Amount" style="border: none;"/>
 
@@ -46,7 +46,7 @@
 
   <div *ngIf="particularsActionBarToggler" class="rf-spacer-bottom rf-spacer-left">
     <!-- A button to add more particulars btn btn-default.-->
-    <button type="button" class="btn btn-default" title="Add More" (click)="addMoreParticular()">Add more</button>
+    <button type="button" class="btn btn-default" title="Add More" (click)="addMoreParticular()">Add</button>
     <!-- A button to finalize the particulars and list all them in rform component and submit. -->
     <button type="button" class="btn btn-default" title="Finalize your particulars" (click)="finalizeOnParticulars()">Submit for approval</button>
   </div>
