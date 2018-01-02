@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { RformService } from '../common/rform.service';
+import { RformDataService } from '../common/form.data.service';
 
 @Component({
   selector: 'app-rform',
@@ -18,7 +19,7 @@ export class RformComponent implements OnInit {
   ngOnInit() {
   }
 
-  constructor(private http: Http, private rformService: RformService) {
+  constructor(private http: Http, private rformService: RformService, private rformDataService: RformDataService) {
   }
 
   loadOnEmpIdChange(id: any) {
@@ -26,6 +27,7 @@ export class RformComponent implements OnInit {
       this.rformService.getEmployeeDataByEmpId(id).subscribe(data => {
         this.isValidEmp = true;
         this.enableParticularsComponent = true;
+        this.rformDataService.setValue(data);
         return this.emp = data;
       });
     } else {

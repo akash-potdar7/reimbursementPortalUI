@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  title: any = 'R portal';
+  title: any = 'Reimbursement Portal';
 
   constructor() { }
 

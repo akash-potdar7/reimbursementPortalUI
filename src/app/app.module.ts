@@ -6,12 +6,16 @@ import { HttpModule } from '@angular/http'
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { RformComponent } from './rform/rform.component';
-import { RformService } from './common/rform.service';
+
 import { RParticularsFormComponent } from './r-particulars-form/r-particulars-form.component';
+import { RformRecordsComponent } from './rform-records/rform-records.component';
+
+import { RformService } from './common/rform.service';
+import { RformDataService } from './common/form.data.service';
 
 import { AgGridModule } from "ag-grid-angular";
-import { RformRecordsComponent } from './rform-records/rform-records.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -28,9 +32,10 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     AgGridModule.withComponents([
       RParticularsFormComponent
     ]),
-    AppRoutingModule
+    AppRoutingModule,
+    DataTablesModule
   ],
-  providers: [RformService],
+  providers: [RformService, RformDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

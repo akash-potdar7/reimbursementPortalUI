@@ -1,3 +1,10 @@
-<p>
-  rform-records works!
-</p>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="container">
+      <blockquote [ngClass]="{hide: headerBarToggler}">{{employee.empName}}</blockquote>
+      <div class="row">
+          <table datatable [dtOptions]="dtOptions" class="row-border hover"></table>
+      </div>
+    </div>
+  </div>
+</div>
